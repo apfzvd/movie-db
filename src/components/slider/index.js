@@ -7,7 +7,7 @@ import Hammer from 'react-hammerjs';
 import styles from './slider.styl';
 
 
-const Slider = ({ autoplay, delay, children, slideClassName, slidesToShow, arrows, className, wrapperClassName, }) => {
+const Slider = ({ autoplay, delay, children, showExtra, slideClassName, slidesToShow, arrows, className, wrapperClassName, }) => {
   const [current, setCurrent] = useState(0);
   const [command, setCommand] = useState('next');
   const [loop, setLoop] = useState(null);
@@ -35,14 +35,6 @@ const Slider = ({ autoplay, delay, children, slideClassName, slidesToShow, arrow
       clearInterval(loop);
       updateLoop(nextSlide);
     }
-  }
-
-  function goTo(val) {
-    return () => {
-      clearInterval(loop);
-      updateLoop(nextSlide);
-      setCurrent(val);
-    };
   }
 
   useEffect(() => {
@@ -82,6 +74,7 @@ const Slider = ({ autoplay, delay, children, slideClassName, slidesToShow, arrow
         return (
           <div className={cx(styles.slide, slideClassName)}>
             {children.slice(indexPlus - slidesToShow, indexPlus)}
+            {showExtra && children.slice(indexPlus, indexPlus + 1)}
           </div>
         );
       }
@@ -125,7 +118,7 @@ const Slider = ({ autoplay, delay, children, slideClassName, slidesToShow, arrow
     <Hammer onSwipeRight={prevSlide} onSwipeLeft={nextSlide}>
       <div className={cx(styles.content, className, { [styles.withArrow]: arrows })}>
         <div className={cx(styles.wrapper, wrapperClassName)}>
-          {renderChildren(current)}
+          {renderChildren()}
         </div>
 
         {arrows && children.length > 1 && renderArrows()}
@@ -137,14 +130,14 @@ const Slider = ({ autoplay, delay, children, slideClassName, slidesToShow, arrow
 Slider.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  arrowClassName: PropTypes.string,
+  showExtra: PropTypes.bool,
   arrows: PropTypes.bool,
   autoplay: PropTypes.bool,
   delay: PropTypes.number,
   slidesToShow: PropTypes.number,
   slideClassName: PropTypes.string,
   wrapperClassName: PropTypes.string,
-};
+}
 
 Slider.defaultProps = {
   delay: 5000,
