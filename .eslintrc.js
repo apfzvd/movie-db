@@ -34,5 +34,6 @@ module.exports = {
     'no-console': ['error', { allow: ['tron'] }],
     'react/forbid-prop-types': 'off',
     'react/require-default-props': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
   },
 };

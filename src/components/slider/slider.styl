@@ -1,0 +1,104 @@
+@import "../../stylus/config.styl";
+
+$arrowBtn {
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 1;
+  box-shadow: 0 4px 12px rgba(0,0,0, 0.35);
+  background: #fff;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  color: $c-primary;
+  font-size: 1.5rem;
+  opacity: .75;
+
+  svg {
+    fill: $c-primary;
+  }
+
+  &:hover {}
+
+  &:active {}
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+/* ==========================================================================
+   Slider Elements
+========================================================================== */
+
+/* ==========================================================================
+   Slider Props
+========================================================================== */
+
+/* Default
+ ================ */
+.wrapper {
+  height: 100%;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+
+  &.withArrow {
+    padding: 0 25px;
+  }
+}
+
+.slide {
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.currentSlide {
+  height: auto;
+  opacity: 1;
+  visibility: visible;
+
+  &.next {
+    animation: slideleft 0.5s forwards;
+  }
+
+  &.prev {
+    animation: slideright 0.5s forwards;
+  }
+}
+
+@keyframes slideleft {
+  0% { transform: translateX(50%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes slideright {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+}
+
+.arrowLeft {
+  @extend $arrowBtn;
+  left: -7px;
+  color: $c-primary;
+}
+
+.arrowRight {
+  @extend $arrowBtn;
+  right: -7px;
+  color: $c-primary;
+}

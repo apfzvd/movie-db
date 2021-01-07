@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+// image url https://image.tmdb.org/t/p/w500/
+
 export const http = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   headers: {
