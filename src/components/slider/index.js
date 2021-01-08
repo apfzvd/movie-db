@@ -7,7 +7,7 @@ import Hammer from 'react-hammerjs';
 import styles from './slider.styl';
 
 
-const Slider = ({ autoplay, delay, children, showExtra, slideClassName, slidesToShow, arrows, className, wrapperClassName, }) => {
+const Slider = ({ autoplay, delay, children, showExtra, slideClassName, slidesToShow, arrows, className, wrapperClassName, onChange }) => {
   const [current, setCurrent] = useState(0);
   const [command, setCommand] = useState('next');
   const [loop, setLoop] = useState(null);
@@ -19,6 +19,12 @@ const Slider = ({ autoplay, delay, children, showExtra, slideClassName, slidesTo
       }, delay))
     }
   }
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(current)
+    }
+  }, [current])
 
   function nextSlide(clear) {
     const childrenLen = children.length / slidesToShow;
@@ -137,6 +143,7 @@ Slider.propTypes = {
   slidesToShow: PropTypes.number,
   slideClassName: PropTypes.string,
   wrapperClassName: PropTypes.string,
+  onChange: PropTypes.func,
 }
 
 Slider.defaultProps = {

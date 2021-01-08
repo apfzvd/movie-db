@@ -7,12 +7,14 @@ import { movies } from '../../services/movies'
 import imageUrl from '../../helpers/image-url';
 
 import Slider from '../slider';
+import Icon from '../icon'
 
 import styles from './shelf.styl';
 
-const Shelf = ({ title: shelfTitle, displayInfo, request, slidesToShow, showExtra, tileOrientation }) => {
+const Shelf = ({ title: shelfTitle, displayInfo, request, slidesToShow, showExtra, tileOrientation, onChange, className, arrows }) => {
   const [loading, setLoading] = useState(false);
   const [movieList, setMovieList] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(1);
 
   async function getList() {
     setLoading(true);
@@ -28,19 +30,48 @@ const Shelf = ({ title: shelfTitle, displayInfo, request, slidesToShow, showExtr
     getList();
   }, []);
 
+  useEffect(() => {
+    if (movieList.length && onChange) {
+      const index = currentSlide * slidesToShow;
+      onChange(movieList[index], currentSlide);
+    }
+  }, [currentSlide, movieList])
+
+  function renderTitle(){
+    const urlList = {
+      getTopRated: 'movie/top-rated',
+      getUpcoming: 'movie/upcoming',
+    }
+
+    const url = urlList[request] || 'movie';
+
+    return (
+      <div className={styles.titleWrap}>
+        <h2 className={styles.title}>{shelfTitle}</h2>
+        <a className={styles.link} target="_blank" href={`https://www.themoviedb.org/${url}`}>Ver Todos</a>
+      </div>
+    )
+  }
+
   const renderMoviePopularity = ({ popularity }) => (
-    <div>{Math.ceil(popularity)}</div>
+    <div className={styles.count}>
+      <Icon className={cx(styles.icon, styles.popular)} name="favorite" />
+      {Math.ceil(popularity)}
+    </div>
   )
 
   const renderMovieRating = ({ vote_average }) => (
-    <div>{vote_average}</div>
+    <div className={styles.count}>
+      <Icon className={cx(styles.icon, styles.rating)} name="grade" />
+      {vote_average}
+    </div>
   )
 
   const renderMovieDetails = ({ title, release_date }) => (
-    <div>{title} - {release_date}</div>
+    <div className={styles.details}>{title} - {release_date}</div>
   )
 
-  function renderTile(movie) {
+  function renderSlide(movie) {
     const movieImage = tileOrientation === 'portrait' ? movie.poster_path : movie.backdrop_path
 
     return <div className={styles.tile}>
@@ -54,10 +85,18 @@ const Shelf = ({ title: shelfTitle, displayInfo, request, slidesToShow, showExtr
   }
 
   return (
-    <div>
-      {shelfTitle && <h2>{shelfTitle}</h2>}
-      {loading ? 'loading...' : <Slider slideClassName={cx(styles.slide, { [styles.isShowOne]: slidesToShow === 1 })} slidesToShow={slidesToShow} showExtra={showExtra}>
-        {movieList.map(movie => renderTile(movie))}
+    <div className={className}>
+      {shelfTitle && renderTitle()}
+      {loading
+        ? 'loading...'
+        : <Slider
+            slideClassName={cx(styles.slide, { [styles.isShowExtra]: showExtra })}
+            onChange={setCurrentSlide}
+            slidesToShow={slidesToShow}
+            showExtra={showExtra}
+            arrows={arrows}
+          >
+        {movieList.map(movie => renderSlide(movie))}
       </Slider>}
     </div>
   )
@@ -65,11 +104,12 @@ const Shelf = ({ title: shelfTitle, displayInfo, request, slidesToShow, showExtr
 
 Shelf.propTypes = {
   title: PropTypes.string,
-  request: PropTypes.oneOf(['getTopRated', 'getDiscover', 'getUpcoming', 'getSimilar', ]).isRequired,
+  request: PropTypes.oneOf(['getTopRated', 'getDiscover', 'getUpcoming', 'getSimilar']).isRequired,
   displayInfo: PropTypes.oneOf(['popularity', 'rating', 'details', 'clean']),
   slidesToShow: PropTypes.number,
   showExtra: PropTypes.bool,
-  tileOrientation: PropTypes.oneOf(['portrait', 'landscape'])
+  tileOrientation: PropTypes.oneOf(['portrait', 'landscape']),
+  onChange: PropTypes.func,
 }
 
 Shelf.defaultProps = {

@@ -1,11 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
   font-family: 'Raleway', sans-serif;
-  font-size: 16px;
+  font-feature-settings: 'lnum' 1; // the more you know
 }
 
 img {
   width: 100%;
   height: auto;
 }
+
+:global {
+  .flow > * + * {
+    margin-top: 1.2rem;
+  }
+}
+
