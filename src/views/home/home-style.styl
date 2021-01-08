@@ -1,3 +1,48 @@
+$sectionPadding {
+  padding: 2.2rem;
+  overflow: hidden;
+}
+
 .container {
   text-align: center;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.heroText {
+  color: #fff;
+  margin-bottom: 2rem;
+  z-index: 1;
+  position: relative;
+  text-align: left;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.heroSubTitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.heroBack {
+  position: absolute;
+  filter: blur(12px) saturate(0.5);
+  width: unset;
+  height: calc(100% + 22px);
+  left: -12px;
+  top: -12px;
+}
+
+.heroWrapper {
+  @extend $sectionPadding;
+}
+
+.shelfRow {
+  @extend $sectionPadding;
 }
