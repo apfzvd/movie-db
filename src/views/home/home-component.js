@@ -12,6 +12,7 @@ const Home = ({ topRated, ...actions }) => {
 
   return (
     <div className={styles.container}>
+      <Shelf type="info" request="getNowPlaying" slidesToShow={1} />
       <Shelf title="Top Rated" request="getTopRated" />
       <Shelf title="Loved" request="getTopLoved" />
     </div>

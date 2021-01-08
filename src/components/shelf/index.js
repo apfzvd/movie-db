@@ -10,7 +10,7 @@ import Slider from '../slider';
 
 import styles from './shelf.styl';
 
-const Shelf = ({ title, type, request }) => {
+const Shelf = ({ title, type, request, slidesToShow, showExtra, tileOrientation }) => {
   const [loading, setLoading] = useState(false);
   const [movieList, setMovieList] = useState([]);
 
@@ -29,16 +29,18 @@ const Shelf = ({ title, type, request }) => {
   }, []);
 
   function renderTile(movie) {
-    return <div className={styles.title}>
-      <img src={imageUrl(movie.poster_path)} alt=""/>
+    const movieImage = tileOrientation === 'portrait' ? movie.poster_path : movie.backdrop_path
+
+    return <div className={styles.tile}>
+      <img src={imageUrl(movieImage)} alt=""/>
       {movie.title}
     </div>
   }
 
   return (
     <div>
-      <h2>{title}</h2>
-      <Slider slideClassName={styles.slide} slidesToShow={2} showExtra>
+      {title && <h2>{title}</h2>}
+      <Slider slideClassName={cx(styles.slide, { [styles.isShowOne]: slidesToShow === 1 })} slidesToShow={slidesToShow} showExtra={showExtra}>
         {movieList.map(movie => renderTile(movie))}
       </Slider>
     </div>
@@ -49,10 +51,16 @@ Shelf.propTypes = {
   title: PropTypes.string,
   request: PropTypes.oneOf(['getTopRated', 'getTopLoved', 'getNowPlaying', 'getSimilar', ]).isRequired,
   type: PropTypes.oneOf(['popularity', 'rating', 'info', 'clean']),
+  slidesToShow: PropTypes.number,
+  showExtra: PropTypes.bool,
+  tileOrientation: PropTypes.oneOf(['portrait', 'landscape'])
 }
 
 Shelf.defaultProps = {
   type: 'clean',
+  slidesToShow: 2,
+  showExtra: true,
+  tileOrientation: 'portrait',
 }
 
 export default Shelf;
