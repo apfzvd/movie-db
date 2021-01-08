@@ -1,16 +1,15 @@
 import { http } from '../config/api'
 
 export const movies = {
+  getDiscover({ page = 1 } = {}) {
+    return http.get('/discover/movie', { params: { page } })
+  },
+  getUpcoming({ page = 1 } = {}) {
+    return http.get('/movie/upcoming', { params: { page } })
+  },
   getTopRated({ page = 1 } = {}) {
     // vote_average
     return http.get('movie/top_rated', { params: { page } })
-  },
-  getTopLoved({ page = 1 } = {}) {
-    // popularity
-    return http.get('movie/popular', { params: { page } })
-  },
-  getNowPlaying({ page = 1 } = {}) {
-    return http.get('movie/now_playing', { params: { page } })
   },
   // details
   getDetails({ movie_id } = {}) {
