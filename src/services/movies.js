@@ -10,7 +10,7 @@ export const movies = {
     return http.get('movie/popular', { params: { page } })
   },
   getNowPlaying({ page = 1 } = {}) {
-   return http.get('movie/now_playing', { params: { page } })
+    return http.get('movie/now_playing', { params: { page } })
   },
   // details
   getDetails({ movie_id } = {}) {
@@ -27,5 +27,5 @@ export const movies = {
   },
   getVideos({ movie_id } = {}) {
     return http.get(`/movie/${movie_id}/videos`)
-  }
+  },
 }
