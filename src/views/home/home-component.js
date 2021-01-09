@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -14,9 +14,12 @@ const Home = () => {
   const [currentHeroMovie, setCurrentHeroMovie] = useState(null)
   const screenSize = useSelector(({ layout }) => layout.screenSize)
 
-  useEffect(() => {
-    console.log('screenSize [HOME]', screenSize)
-  }, [screenSize])
+  const shelfConfig = {
+    tileOrientation: ['large', 'xlarge'].includes(screenSize) ? 'landscape' : 'portrait',
+    slidesToShow: screenSize !== 'small' ? 4 : 3,
+    showExtra: ['small', 'medium'].includes(screenSize),
+    arrows: ['large', 'xlarge'].includes(screenSize),
+  }
 
   return (
     <div className={styles.container}>
@@ -27,14 +30,14 @@ const Home = () => {
             <h1 className={styles.heroTitle}>O cinema nas suas mãos</h1>
             <h3 className={styles.heroSubTitle}>Filmes adicionados e selecionados exclusivamente para você</h3>
           </div>
-          <Shelf className={styles.heroSlider} displayInfo="info" request="getUpcoming" slidesToShow={1} onChange={setCurrentHeroMovie} />
+          <Shelf {...shelfConfig} className={styles.heroSlider} displayInfo="info" request="getUpcoming" slidesToShow={1} onChange={setCurrentHeroMovie} />
         </div>
       </section>
       <section className={styles.shelfRow}>
-       <Shelf displayInfo="popularity" title="Os mais amados" request="getDiscover" />
+       <Shelf {...shelfConfig} displayInfo="popularity" title="Os mais amados" request="getDiscover" />
       </section>
       <section className={styles.shelfRow}>
-        <Shelf displayInfo="rating" title="Os melhores avaliados" request="getTopRated" />
+        <Shelf {...shelfConfig} displayInfo="rating" title="Os melhores avaliados" request="getTopRated" />
       </section>
     </div>
   )

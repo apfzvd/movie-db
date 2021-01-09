@@ -20,7 +20,7 @@ const getScreenSize = () => {
     return 'medium';
   }
 
-  return 'mobile'
+  return 'small'
 };
 
 export default getScreenSize
