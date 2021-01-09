@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 
-import movies from './views/home/home-store';
+import layout from './components/layout/layout-store';
 
 const reducers = combineReducers({
-  movies
+  layout
 })
 
 const store = createStore(

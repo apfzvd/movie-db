@@ -1,11 +1,14 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
+
+import AppRoute from './helpers/app-route'
+
 import Home from './views/home'
 
 export default function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
+      <AppRoute exact path="/" component={Home} />
     </Switch>
   )
 }

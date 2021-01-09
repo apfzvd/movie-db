@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import cx from 'classnames'
@@ -9,12 +10,13 @@ import imageUrl from '../../helpers/image-url';
 
 import styles from './home-style.styl'
 
-const Home = ({ topRated, ...actions }) => {
+const Home = () => {
   const [currentHeroMovie, setCurrentHeroMovie] = useState(null)
+  const screenSize = useSelector(({ layout }) => layout.screenSize)
 
   useEffect(() => {
-    actions.getTopRated();
-  }, []);
+    console.log('screenSize [HOME]', screenSize)
+  }, [screenSize])
 
   return (
     <div className={styles.container}>
@@ -38,8 +40,6 @@ const Home = ({ topRated, ...actions }) => {
   )
 }
 
-Home.propTypes = {
-  topRated: PropTypes.array,
-}
+Home.propTypes = {}
 
 export default Home
