@@ -9,18 +9,18 @@ const getScreenSize = () => {
   const isXLarge = window.matchMedia(screenSizes.xlarge).matches // 1280px
 
   if (isXLarge) {
-    return 'xlarge';
+    return 'xlarge'
   }
 
   if (isLarge) {
-    return 'large';
+    return 'large'
   }
 
   if (isMedium) {
-    return 'medium';
+    return 'medium'
   }
 
   return 'small'
-};
+}
 
 export default getScreenSize

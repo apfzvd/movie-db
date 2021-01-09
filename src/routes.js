@@ -7,14 +7,14 @@ import Home from './views/home'
 
 import history from './history'
 
-const Teste = () => (<div>Teste</div>)
+const Teste = () => <div>Teste</div>
 
 export default function Routes() {
   return (
     <Router history={history}>
       <Switch>
         <AppRoute exact path="/" component={Home} />
-        <AppRoute exact path="/teste" component={Teste} />
+        <AppRoute exact path="/filme/:movieId" component={Teste} />
       </Switch>
     </Router>
   )

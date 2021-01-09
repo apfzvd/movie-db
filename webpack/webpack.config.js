@@ -6,9 +6,7 @@ const stylysPostCSS = [cssNano({ preset: 'default' })]
 
 module.exports = {
   entry: {
-    boilerplate: [
-      path.resolve(__dirname, '../src'),
-    ],
+    boilerplate: [path.resolve(__dirname, '../src')],
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -31,10 +29,7 @@ module.exports = {
       {
         test: /\.css/,
         sideEffects: true,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /.*\.(gif|svg|png|jpe?g)$/i,
