@@ -9,8 +9,8 @@ const layoutSlice = createSlice({
     updateDimensions: (state, action) => {
       const { screenSize } = action.payload
       state.screenSize = screenSize
-    }
-  }
+    },
+  },
 })
 
 export const { updateDimensions } = layoutSlice.actions

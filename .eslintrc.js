@@ -2,24 +2,24 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    "jest/globals": true,
+    'jest/globals': true,
     jest: true,
     mocha: true,
   },
-  parser: "@babel/eslint-parser",
+  parser: '@babel/eslint-parser',
   globals: {
     cy: true,
     Cypress: true,
   },
-  extends: ['airbnb', 'prettier', 'prettier/react'],
+  extends: ['airbnb-base', 'airbnb/rules/react', 'prettier', 'prettier/react'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: 'module',
   },
-  plugins: ["react", "jest", "prettier"],
+  plugins: ['react', 'jest', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
@@ -35,6 +35,5 @@ module.exports = {
     'no-console': ['error', { allow: ['tron'] }],
     'react/forbid-prop-types': 'off',
     'react/require-default-props': 'off',
-    'jsx-a11y/no-noninteractive-element-interactions': 'off',
   },
-};
+}

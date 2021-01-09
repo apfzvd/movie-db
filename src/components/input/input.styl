@@ -1,0 +1,38 @@
+@import "../../stylus/config.styl";
+
+$icon {
+  position: absolute;
+  z-index: 1;
+  top: 5px;
+  color: $c-text;
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.input.text {
+  display: inline-block;
+  border: 1px solid $c-light-text;
+  border-radius: 30px;
+  height: 30px;
+  padding: 0 1rem;
+  color: $c-text;
+
+  &::-moz-selection { background: $c-primary; color: #fff; }
+  &::selection { background: $c-primary; color: #fff; }
+
+  &:focus {
+    border: 1px solid $c-title;
+    outline: 0;
+  }
+}
+
+.input.withIconLeft {
+  padding-left: 2.5rem;
+}
+
+.iconLeft {
+  @extend $icon;
+  left: 0.5rem;
+}

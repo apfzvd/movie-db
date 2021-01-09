@@ -11,6 +11,15 @@ img {
   height: auto;
 }
 
+$sectionPadding {
+  padding: 2.2rem;
+  overflow: hidden;
+
+  +forLarge() {
+    padding: 4rem;
+  }
+}
+
 :global {
   .flow > * + * {
     margin-top: 1.2rem;
