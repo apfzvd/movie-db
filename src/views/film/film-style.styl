@@ -35,6 +35,63 @@
   @extend $sectionPadding;
 }
 
+.title {
+  @extend $title;
+}
+
+.count {
+  display: flex;
+}
+
+.countItem {
+  @extend $flexCenter;
+  font-weight: 700;
+}
+
+$icon {
+  margin-right: .3rem;
+}
+
+.popular {
+  @extend $icon;
+  color: $c-loved-red;
+}
+
+.rating {
+  @extend $icon;
+  color: $c-rating-yellow;
+}
+
 .related {
   @extend $sectionPadding;
+}
+
+.nav {
+  display: flex;
+}
+
+.navItem {
+  position: relative;
+
+  &.isActive {
+    color: $c-primary;
+    font-weight: 700;
+  }
+
+  &.isActive:after{
+    content: '';
+    display: inline-block;
+    width: 90%;
+    height: 5px;
+    background: $c-primary;
+    border-radius: 15px;
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translate(-50%, 0);
+  }
+}
+
+.navContent {
+  margin-top: 2.5rem;
 }

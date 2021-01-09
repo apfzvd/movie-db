@@ -24,27 +24,39 @@ const Film = ({ match: { params } }) => {
       dispatch(fetchFilmDetails(movieId))
       dispatch(fetchVideos(movieId))
     }
-  }, [])
+  }, [params])
 
   const renderDetails = () =>
     details.loading ? (
       'Loading...'
     ) : (
-      <section className={styles.infoHead}>
-        <div>
+      <section className={cx(styles.infoHead, 'flow')}>
+        <div className={cx(styles.infoBase, 'flow')}>
           <h1 className={styles.title}>{details.data.title}</h1>
-          <h4>{details.data.genres.join(',')}</h4>
+          <h4>{details.data.genres.join(', ')}</h4>
         </div>
 
-        <div className={styles.count}>
-          <div>{Math.ceil(details.data.popularity)}</div>
-          <div>{details.data.vote_average} / 10</div>
+        <div className={cx(styles.count, 'flow-col')}>
+          <div className={cx(styles.countItem, 'flow-col')}>
+            <Icon className={styles.popular} name="favorite" />
+            {Math.ceil(details.data.popularity)}
+          </div>
+          <div className={cx(styles.countItem)}>
+            <Icon className={styles.rating} name="grade" />
+            {details.data.vote_average}/10
+          </div>
         </div>
 
-        <ul className={styles.nav}>
-          <li>Info</li>
-          <li>Reviews</li>
-          <li>Trailers</li>
+        <ul className={cx(styles.nav, 'flow-col')}>
+          <li className={cx(styles.navItem, { [styles.isActive]: true })}>
+            Info
+          </li>
+          <li className={cx(styles.navItem, { [styles.isActive]: false })}>
+            Reviews
+          </li>
+          <li className={cx(styles.navItem, { [styles.isActive]: false })}>
+            Trailers
+          </li>
         </ul>
 
         <div className={styles.navContent}>{details.data.overview}</div>
