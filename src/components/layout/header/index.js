@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 
@@ -12,6 +12,7 @@ import Icon from '../../icon'
 import Input from '../../input'
 
 const Header = ({ screenSize }) => {
+  const [search, setSearch] = useState('')
   const location = useLocation()
 
   function getItems() {
@@ -23,7 +24,7 @@ const Header = ({ screenSize }) => {
       },
       {
         name: 'Descubir',
-        path: '/filme/aaa',
+        path: '/descubra',
         icon: 'movie',
       },
       {
@@ -52,6 +53,11 @@ const Header = ({ screenSize }) => {
     return location.pathname.includes(path)
   }
 
+  const submitSearch = (evt) => {
+    evt.preventDefault()
+    navigateTo(`/busca/${search}`)
+  }
+
   const renderLargeHeader = () => {
     const { headerLargeItems } = getItems()
     return (
@@ -72,11 +78,11 @@ const Header = ({ screenSize }) => {
         </nav>
 
         <div className={styles.headerLargeSide}>
-          <form onSubmit={() => navigateTo('/filme/555')}>
-            <Input iconLeft="search" type="text" />
+          <form onSubmit={submitSearch}>
+            <Input onChange={setSearch} iconLeft="search" type="text" />
           </form>
           <div className={styles.headerItemPerf}>
-            <img src="https://picsum.photos/60" alt="Perfil"/>
+            <img src="https://picsum.photos/60" alt="Perfil" />
           </div>
         </div>
       </div>
@@ -108,7 +114,7 @@ const Header = ({ screenSize }) => {
             onClick={() => navigateTo('/perfil')}
           >
             <div className={styles.headerItemPerf}>
-              <img src="https://picsum.photos/60" alt="Perfil"/>
+              <img src="https://picsum.photos/60" alt="Perfil" />
             </div>
             <span className={styles.headerItemName}>Perfil</span>
           </li>

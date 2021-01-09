@@ -7,11 +7,17 @@ import Icon from '../icon'
 
 import styles from './input.styl'
 
-const Input = ({ type, className, iconLeft, ...props }) => {
+const Input = ({ type, className, iconLeft, onChange, ...props }) => {
+  const handleChange = (evt) => {
+    if (onChange) {
+      onChange(evt.target.value, evt)
+    }
+  }
+
   return (
     <div className={styles.inputWrap}>
-      {iconLeft && <Icon className={styles.iconLeft} name={iconLeft} />}
       <input
+        onChange={handleChange}
         className={cx(
           styles.input,
           { [styles[type]]: type, [styles.withIconLeft]: iconLeft },
@@ -20,6 +26,7 @@ const Input = ({ type, className, iconLeft, ...props }) => {
         type={type}
         {...props}
       />
+      {iconLeft && <Icon className={styles.iconLeft} name={iconLeft} />}
     </div>
   )
 }
@@ -28,6 +35,7 @@ Input.propTypes = {
   type: PropTypes.string,
   className: PropTypes.string,
   iconLeft: PropTypes.string,
+  onChange: PropTypes.func,
 }
 
 Input.defaultProps = {}

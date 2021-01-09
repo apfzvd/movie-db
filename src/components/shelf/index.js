@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
@@ -18,23 +19,30 @@ const Shelf = ({
   request,
   slidesToShow,
   showExtra,
-  tileOrientation,
   onChange,
   className,
   arrows,
+  searchId,
 }) => {
   const [loading, setLoading] = useState(false)
   const [movieList, setMovieList] = useState([])
   const [currentSlide, setCurrentSlide] = useState(1)
 
+  const screenSize = useSelector(({ layout }) => layout.screenSize)
+
+  const shelfBaseConfig = {
+    slidesToShow: screenSize !== 'small' ? 4 : 3,
+    showExtra: ['small', 'medium'].includes(screenSize),
+    arrows: ['large', 'xlarge'].includes(screenSize),
+  }
+
   async function getList() {
     setLoading(true)
-    const data = await movies[request]()
+    const data = await movies[request](searchId)
     setLoading(false)
     if (data.data.results) {
       setMovieList(data.data.results)
     }
-    console.log('data', data)
   }
 
   useEffect(() => {
@@ -62,6 +70,7 @@ const Shelf = ({
         <a
           className={styles.link}
           target="_blank"
+          rel="noreferrer"
           href={`https://www.themoviedb.org/${url}`}
         >
           Ver Todos
@@ -94,8 +103,9 @@ const Shelf = ({
   const goToMovie = ({ id }) => () => navigateTo(`/filme/${id}`)
 
   function renderSlide(movie) {
-    const movieImage =
-      tileOrientation === 'portrait' ? movie.poster_path : movie.backdrop_path
+    const movieImage = ['large', 'xlarge'].includes(screenSize)
+      ? movie.backdrop_path
+      : movie.poster_path
 
     return (
       <div
@@ -116,7 +126,7 @@ const Shelf = ({
           })}
         >
           {displayInfo === 'details' && renderMovieDetails(movie)}
-          {displayInfo !== 'details' && (
+          {displayInfo !== 'details' && displayInfo !== 'clean' && (
             <>
               <div className={styles.tileCountWrap}>
                 {displayInfo === 'popularity' && renderMoviePopularity(movie)}
@@ -137,6 +147,7 @@ const Shelf = ({
         'loading...'
       ) : (
         <Slider
+          {...shelfBaseConfig}
           slideClassName={cx(styles.slide, { [styles.isShowExtra]: showExtra })}
           onChange={setCurrentSlide}
           slidesToShow={slidesToShow}
@@ -163,6 +174,9 @@ Shelf.propTypes = {
   showExtra: PropTypes.bool,
   tileOrientation: PropTypes.oneOf(['portrait', 'landscape']),
   onChange: PropTypes.func,
+  className: PropTypes.string,
+  arrows: PropTypes.bool,
+  searchId: PropTypes.number,
 }
 
 Shelf.defaultProps = {

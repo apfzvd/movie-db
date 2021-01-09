@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
-
 import cx from 'classnames'
 
 import Shelf from '../../components/shelf'
@@ -12,16 +9,6 @@ import styles from './home-style.styl'
 
 const Home = () => {
   const [currentHeroMovie, setCurrentHeroMovie] = useState(null)
-  const screenSize = useSelector(({ layout }) => layout.screenSize)
-
-  const shelfConfig = {
-    tileOrientation: ['large', 'xlarge'].includes(screenSize)
-      ? 'landscape'
-      : 'portrait',
-    slidesToShow: screenSize !== 'small' ? 4 : 3,
-    showExtra: ['small', 'medium'].includes(screenSize),
-    arrows: ['large', 'xlarge'].includes(screenSize),
-  }
 
   return (
     <div className={styles.container}>
@@ -41,7 +28,6 @@ const Home = () => {
             </h3>
           </div>
           <Shelf
-            {...shelfConfig}
             className={styles.heroSlider}
             displayInfo="details"
             request="getUpcoming"
@@ -52,7 +38,6 @@ const Home = () => {
       </section>
       <section className={styles.shelfRow}>
         <Shelf
-          {...shelfConfig}
           displayInfo="popularity"
           title="Os mais amados"
           request="getDiscover"
@@ -60,7 +45,6 @@ const Home = () => {
       </section>
       <section className={styles.shelfRow}>
         <Shelf
-          {...shelfConfig}
           displayInfo="rating"
           title="Os melhores avaliados"
           request="getTopRated"
