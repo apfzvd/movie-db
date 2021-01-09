@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -12,7 +11,7 @@ import Icon from '../../components/icon'
 import imageUrl from '../../helpers/image-url'
 
 import styles from './film-style.styl'
-import navigateTo, { goBack } from '~/helpers/navigate-to'
+import { goBack } from '../../helpers/navigate-to'
 
 const Film = ({ match: { params } }) => {
   const dispatch = useDispatch()

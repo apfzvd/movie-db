@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Switch, Route } from 'react-router-dom'
+import { Router, Switch } from 'react-router-dom'
 
 import AppRoute from './helpers/app-route'
 
@@ -15,7 +15,12 @@ export default function Routes() {
     <Router history={history}>
       <Switch>
         <AppRoute exact path="/" component={Home} />
-        <Route exact path="/filme/:movieId" component={Film} />
+        <AppRoute
+          exact
+          path="/filme/:movieId"
+          component={Film}
+          withHeader={false}
+        />
         <AppRoute exact path="/busca/:query" component={Teste} />
         <AppRoute exact path="/descubra" component={Teste} />
         <AppRoute exact path="/favoritos" component={Teste} />

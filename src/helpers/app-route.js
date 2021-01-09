@@ -7,6 +7,7 @@ import Layout from '../components/layout'
 const AppRoute = ({
   component: Component,
   wrapper: Wrapper = Layout,
+  withHeader = true,
   ...rest
 }) => {
   return (
@@ -14,7 +15,7 @@ const AppRoute = ({
       {...rest}
       exact
       render={(matchProps) => (
-        <Wrapper>
+        <Wrapper withHeader={withHeader}>
           <Component {...matchProps} />
         </Wrapper>
       )}
@@ -25,6 +26,7 @@ const AppRoute = ({
 AppRoute.propTypes = {
   component: PropTypes.node,
   wrapper: PropTypes.node,
+  withHeader: PropTypes.bool,
 }
 
 export default AppRoute

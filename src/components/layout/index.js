@@ -12,7 +12,7 @@ import Header from './header'
 
 import styles from './layout.styl'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, withHeader = true }) => {
   const dispatch = useDispatch()
   const screenSize = useSelector(({ layout }) => layout.screenSize)
 
@@ -31,8 +31,8 @@ const Layout = ({ children }) => {
   }, [])
 
   return (
-    <div className={styles.wrapper}>
-      <Header screenSize={screenSize} />
+    <div className={cx(styles.wrapper, { [styles.withHeader]: withHeader })}>
+      {withHeader ? <Header screenSize={screenSize} /> : null}
       <main>{children}</main>
     </div>
   )
