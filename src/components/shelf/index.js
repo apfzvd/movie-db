@@ -5,6 +5,7 @@ import cx from 'classnames';
 import { movies } from '../../services/movies'
 
 import imageUrl from '../../helpers/image-url';
+import navigateTo from '../../helpers/navigate-to'
 
 import Slider from '../slider';
 import Icon from '../icon'
@@ -68,18 +69,27 @@ const Shelf = ({ title: shelfTitle, displayInfo, request, slidesToShow, showExtr
   )
 
   const renderMovieDetails = ({ title, release_date }) => (
-    <div className={styles.details}>{title} - {release_date}</div>
+    <div className={cx(styles.details, 'flow')}>
+      <h4 className={styles.detailsTitle}>{title}</h4>
+      <p className={styles.detailsSubtitle}>{release_date}</p>
+    </div>
   )
 
   function renderSlide(movie) {
     const movieImage = tileOrientation === 'portrait' ? movie.poster_path : movie.backdrop_path
 
-    return <div className={styles.tile}>
+    return <div onClick={() => {navigateTo('teste')}} className={cx(styles.tile, { [styles.withHoverScale]: slidesToShow > 1 })}>
       <img className={styles.tileImage} src={imageUrl(movieImage)} alt={`Poster do filme ${movie.title}`}/>
-      <div className={styles.tileInfo}>
+
+      <div className={cx(styles.tileInfo, { [styles.isDetails]: displayInfo === 'details' })}>
         {displayInfo === 'details' && renderMovieDetails(movie)}
-        {displayInfo === 'popularity' && renderMoviePopularity(movie)}
-        {displayInfo === 'rating' && renderMovieRating(movie)}
+        {displayInfo !== 'details' && <>
+          <div className={styles.tileCountWrap}>
+            {displayInfo === 'popularity' && renderMoviePopularity(movie)}
+            {displayInfo === 'rating' && renderMovieRating(movie)}
+          </div>
+          <div className={styles.tileName}>{movie.title}</div>
+        </>}
       </div>
     </div>
   }

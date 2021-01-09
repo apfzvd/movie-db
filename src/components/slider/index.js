@@ -4,6 +4,8 @@ import cx from 'classnames';
 
 import Hammer from 'react-hammerjs';
 
+import Icon from '../icon'
+
 import styles from './slider.styl';
 
 
@@ -110,11 +112,11 @@ const Slider = ({ autoplay, delay, children, showExtra, slideClassName, slidesTo
     return (
       <div className={styles.arrow}>
         <button type="button" className={styles.arrowLeft} onClick={() => prevSlide()}>
-          &lsaquo;
+          <Icon name="arrow_back_ios" />
         </button>
 
         <button type="button" className={styles.arrowRight} onClick={() => nextSlide(true)}>
-          &rsaquo;
+          <Icon name="arrow_forward_ios" />
         </button>
       </div>
     );

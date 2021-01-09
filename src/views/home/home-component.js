@@ -30,7 +30,7 @@ const Home = () => {
             <h1 className={styles.heroTitle}>O cinema nas suas mãos</h1>
             <h3 className={styles.heroSubTitle}>Filmes adicionados e selecionados exclusivamente para você</h3>
           </div>
-          <Shelf {...shelfConfig} className={styles.heroSlider} displayInfo="info" request="getUpcoming" slidesToShow={1} onChange={setCurrentHeroMovie} />
+          <Shelf {...shelfConfig} className={styles.heroSlider} displayInfo="details" request="getUpcoming" slidesToShow={1} onChange={setCurrentHeroMovie} />
         </div>
       </section>
       <section className={styles.shelfRow}>

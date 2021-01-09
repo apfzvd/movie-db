@@ -1,5 +1,7 @@
 @import "../../stylus/config.styl";
 
+$arrowBtnSize = 36px;
+
 $arrowBtn {
   border: 0;
   cursor: pointer;
@@ -11,17 +13,18 @@ $arrowBtn {
   box-shadow: 0 4px 12px rgba(0,0,0, 0.35);
   background: #fff;
   border-radius: 4px;
-  width: 36px;
-  height: 36px;
-  color: $c-primary;
-  font-size: 1.5rem;
-  opacity: .75;
+  width: $arrowBtnSize;
+  height: $arrowBtnSize;
+  font-size: 2.5rem;
+  opacity: .85;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  svg {
-    fill: $c-primary;
+  &:hover {
+    opacity: 1;
+    transition: all .3s ease-in-out;
   }
-
-  &:hover {}
 
   &:active {}
 
@@ -47,9 +50,7 @@ $arrowBtn {
 .content {
   position: relative;
 
-  &.withArrow {
-    padding: 0 25px;
-  }
+  &.withArrow {}
 }
 
 .slide {
@@ -92,12 +93,14 @@ $arrowBtn {
 
 .arrowLeft {
   @extend $arrowBtn;
-  left: -7px;
+  left: -($arrowBtnSize/2);
   color: $c-primary;
+
+  i { padding-left: 6px; }
 }
 
 .arrowRight {
   @extend $arrowBtn;
-  right: -7px;
+  right: -($arrowBtnSize/2);
   color: $c-primary;
 }

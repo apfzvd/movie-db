@@ -13,15 +13,109 @@ $c-loved-red = #F26E63;
   }
 }
 
-.tile {}
+.tile {
+  position: relative;
+
+  +forLarge() {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.tile.withHoverScale {
+  +forLarge() {
+    transition: transform .15s ease-in-out;
+
+    &:hover {
+      z-index: 2;
+      transition: transform .3s ease-in-out .2s;
+      transform: scale(1.2);
+    }
+  }
+}
 
 .tileImage {
   border-radius: 6px;
   overflow: hidden;
+  height: 300px;
+  width: auto;
+
+  +forLarge() {
+    height: auto;
+    width: 100%;
+  }
 }
 
 .tileInfo {
   margin-top: 1rem;
+
+  +forLarge() {
+    position: absolute;
+    z-index: 1;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    width: calc(100% - 3rem);
+  }
+
+  &.isDetails{
+    +forLarge() {
+      left: 4rem;
+      bottom: 2rem;
+    }
+  }
+}
+
+.tileCountWrap {
+  +forLarge() {
+    display: inline-block;
+    margin-top: -20px;
+    padding: .5rem;
+    background: #fff;
+    border-radius: 4px;
+  }
+}
+
+.tileName {
+  display: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  height: 1rem;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  +forLarge() {
+    display: inline-block;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+  }
+}
+
+.tile:hover .tileName {
+  opacity: 1;
+  transition: all .3s ease-in-out;
+  margin-top: 1rem;
+}
+
+.details {
+  color: #fff;
+  font-size: 1rem;
+
+  +forLarge() {
+    font-size: 1.5rem;
+  }
+}
+
+.detailsTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  +forLarge() {
+    font-size: 2.5rem;
+  }
 }
 
 .count {
