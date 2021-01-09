@@ -12,19 +12,19 @@ export const movies = {
     return http.get('movie/top_rated')
   },
   // details
-  getDetails({ movie_id } = {}) {
-    return http.get(`/movie/${movie_id}`)
+  getDetails(filmId) {
+    return http.get(`/movie/${filmId}`)
   },
-  getSimilar(movie_id) {
-    return http.get(`/movie/${movie_id}/similar`)
+  getSimilar(filmId) {
+    return http.get(`/movie/${filmId}/similar`)
   },
-  getCrew({ movie_id } = {}) {
-    return http.get(`/movie/${movie_id}/credits`)
+  getCrew(filmId) {
+    return http.get(`/movie/${filmId}/credits`)
   },
-  getReleaseDates({ movie_id } = {}) {
-    return http.get(`/movie/${movie_id}/release_dates`)
+  getReleaseDates(filmId) {
+    return http.get(`/movie/${filmId}/release_dates`)
   },
-  getVideos({ movie_id } = {}) {
-    return http.get(`/movie/${movie_id}/videos`)
+  getVideos(filmId) {
+    return http.get(`/movie/${filmId}/videos`)
   },
 }

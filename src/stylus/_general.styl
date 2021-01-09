@@ -14,15 +14,26 @@ img {
 $sectionPadding {
   padding: 2.2rem;
   overflow: hidden;
+  box-sizing: border-box;
 
   +forLarge() {
     padding: 4rem;
   }
 }
 
+$flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 :global {
   .flow > * + * {
     margin-top: 1.2rem;
+  }
+
+  .flow-col > * + * {
+    margin-left: 1.2rem;
   }
 }
 

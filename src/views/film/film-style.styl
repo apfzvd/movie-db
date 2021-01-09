@@ -1,0 +1,40 @@
+@import "../../stylus/config.styl";
+
+.hero {
+  position: relative;
+}
+
+.header {
+  @extend $sectionPadding;
+  position: absolute;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.heroImage {
+  display: relative;
+}
+
+.play {
+  @extend $flexCenter;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.infoHead {
+  @extend $sectionPadding;
+}
+
+.related {
+  @extend $sectionPadding;
+}
