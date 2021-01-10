@@ -1,0 +1,27 @@
+@import "../../stylus/config.styl";
+
+.button {
+  background: $c-primary;
+  color: #fff;
+  box-shadow: 0px 2px 2px lighten($c-primary, 5%);
+  border-radius: 10px;
+  font-weight: 700;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 0;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    background: darken($c-primary, 10%);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.button.full {
+  width: 100%;
+}

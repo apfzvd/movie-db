@@ -45,6 +45,17 @@
   @extend $sectionPadding;
 }
 
+.infoBaseWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .buttonWrap {
+    padding: 0;
+    flex: .8;
+  }
+}
+
 .title {
   @extend $title;
 }
@@ -104,4 +115,8 @@ $icon {
 
 .navContent {
   padding-top: 1rem;
+}
+
+.buttonWrap {
+  @extend $sectionPadding;
 }

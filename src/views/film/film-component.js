@@ -8,6 +8,7 @@ import { fetchFilmDetails, fetchVideos } from './film-store'
 
 import Shelf from '../../components/shelf'
 import Icon from '../../components/icon'
+import Button from '../../components/button'
 
 import imageUrl from '../../helpers/image-url'
 
@@ -17,6 +18,7 @@ import { goBack } from '../../helpers/navigate-to'
 const Film = ({ match: { params } }) => {
   const dispatch = useDispatch()
   const { details } = useSelector(({ film }) => film)
+  const screenSize = useSelector(({ layout }) => layout.screenSize)
   const { movieId } = params
 
   useEffect(() => {
@@ -26,17 +28,33 @@ const Film = ({ match: { params } }) => {
     }
   }, [params])
 
+  const renderBtn = () => (
+    <section className={styles.buttonWrap}>
+      <Button
+        className={styles.button}
+        modifier="full"
+        onClick={() => window.open('https://www.stremio.com/', '_blank')}
+      >
+        Assistir
+      </Button>
+    </section>
+  )
+
   const renderDetails = () =>
     details.loading ? (
       'Loading...'
     ) : (
       <section className={cx(styles.infoHead, 'flow')}>
-        <div className={cx(styles.infoBase, 'flow')}>
-          <h1 className={styles.title}>
-            {details.data.title} (
-            {format(new Date(details.data.release_date), 'yyyy')})
-          </h1>
-          <h4>{details.data.genres.join(', ')}</h4>
+        <div className={styles.infoBaseWrap}>
+          <div className={cx(styles.infoBase, 'flow')}>
+            <h1 className={styles.title}>
+              {details.data.title} (
+              {format(new Date(details.data.release_date), 'yyyy')})
+            </h1>
+            <h4>{details.data.genres.join(', ')}</h4>
+          </div>
+
+          {['large', 'xlarge'].includes(screenSize) && renderBtn()}
         </div>
 
         <div className={cx(styles.count, 'flow-col')}>
@@ -113,6 +131,8 @@ const Film = ({ match: { params } }) => {
           searchId={movieId}
         />
       </section>
+
+      {['small', 'medium'].includes(screenSize) && renderBtn()}
     </div>
   )
 }
