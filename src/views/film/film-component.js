@@ -9,6 +9,7 @@ import { fetchFilmDetails, fetchVideos } from './film-store'
 import Shelf from '../../components/shelf'
 import Icon from '../../components/icon'
 import Button from '../../components/button'
+import Loader from '../../components/loader'
 
 import imageUrl from '../../helpers/image-url'
 
@@ -42,7 +43,7 @@ const Film = ({ match: { params } }) => {
 
   const renderDetails = () =>
     details.loading ? (
-      'Loading...'
+      <Loader />
     ) : (
       <section className={cx(styles.infoHead, 'flow')}>
         <div className={styles.infoBaseWrap}>

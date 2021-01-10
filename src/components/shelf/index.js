@@ -11,6 +11,7 @@ import navigateTo from '../../helpers/navigate-to'
 
 import Slider from '../slider'
 import Icon from '../icon'
+import Loader from '../loader'
 
 import styles from './shelf.styl'
 
@@ -22,7 +23,6 @@ const Shelf = ({
   showExtra,
   onChange,
   className,
-  arrows,
   searchId,
 }) => {
   const [loading, setLoading] = useState(true)
@@ -151,7 +151,7 @@ const Shelf = ({
     <div className={className}>
       {shelfTitle && renderTitle()}
       {loading ? (
-        'loading...'
+        <Loader />
       ) : (
         <Slider
           {...shelfBaseConfig}
@@ -185,7 +185,6 @@ Shelf.propTypes = {
   tileOrientation: PropTypes.oneOf(['portrait', 'landscape']),
   onChange: PropTypes.func,
   className: PropTypes.string,
-  arrows: PropTypes.bool,
   searchId: PropTypes.number,
 }
 
@@ -194,7 +193,6 @@ Shelf.defaultProps = {
   slidesToShow: 2,
   showExtra: true,
   tileOrientation: 'portrait',
-  arrows: false,
 }
 
 export default Shelf

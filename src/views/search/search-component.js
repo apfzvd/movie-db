@@ -9,6 +9,7 @@ import truncate from '../../helpers/truncate'
 
 import Input from '../../components/input'
 import Icon from '../../components/icon'
+import Loader from '../../components/loader'
 
 import { movies } from '../../services/movies'
 
@@ -100,7 +101,7 @@ const Search = ({ match: { params } }) => {
   )
 
   const renderResults = () =>
-    loading ? 'loading...' : result.map((res) => renderFilms(res))
+    loading ? <Loader /> : result.map((res) => renderFilms(res))
 
   return (
     <div className={styles.search}>
