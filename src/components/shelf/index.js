@@ -156,7 +156,6 @@ const Shelf = ({
           onChange={setCurrentSlide}
           slidesToShow={slidesToShow}
           showExtra={showExtra}
-          arrows={arrows}
         >
           {movieList.map((movie) => renderSlide(movie))}
         </Slider>
@@ -191,6 +190,7 @@ Shelf.defaultProps = {
   slidesToShow: 2,
   showExtra: true,
   tileOrientation: 'portrait',
+  arrows: false,
 }
 
 export default Shelf

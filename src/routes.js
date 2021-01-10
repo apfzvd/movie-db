@@ -6,10 +6,9 @@ import AppRoute from './helpers/app-route'
 import Home from './views/home'
 import Film from './views/film'
 import Search from './views/search'
+import Discover from './views/discover'
 
 import history from './history'
-
-const Teste = () => <div>Teste</div>
 
 export default function Routes() {
   return (
@@ -24,8 +23,8 @@ export default function Routes() {
         />
         <AppRoute exact path="/busca" component={Search} />
         <AppRoute exact path="/busca/:query" component={Search} />
-        <AppRoute exact path="/descubra" component={Teste} />
-        <AppRoute exact path="/favoritos" component={Teste} />
+        <AppRoute exact path="/descubra" component={Discover} />
+        <AppRoute exact path="/favoritos" component={Discover} />
       </Switch>
     </Router>
   )

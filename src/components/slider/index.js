@@ -1,24 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import cx from 'classnames';
+import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import cx from 'classnames'
 
-import Hammer from 'react-hammerjs';
+import Hammer from 'react-hammerjs'
 
 import Icon from '../icon'
 
-import styles from './slider.styl';
+import styles from './slider.styl'
 
-
-const Slider = ({ autoplay, delay, children, showExtra, slideClassName, slidesToShow, arrows, className, wrapperClassName, onChange }) => {
-  const [current, setCurrent] = useState(0);
-  const [command, setCommand] = useState('next');
-  const [loop, setLoop] = useState(null);
+const Slider = ({
+  autoplay,
+  delay,
+  children,
+  showExtra,
+  slideClassName,
+  slidesToShow,
+  arrows,
+  className,
+  wrapperClassName,
+  onChange,
+}) => {
+  const [current, setCurrent] = useState(0)
+  const [command, setCommand] = useState('next')
+  const [loop, setLoop] = useState(null)
 
   function updateLoop(nextFunction) {
     if (autoplay) {
-      setLoop(setInterval(() => {
-        nextFunction();
-      }, delay))
+      setLoop(
+        setInterval(() => {
+          nextFunction()
+        }, delay)
+      )
     }
   }
 
@@ -29,102 +41,115 @@ const Slider = ({ autoplay, delay, children, showExtra, slideClassName, slidesTo
   }, [current])
 
   function nextSlide(clear) {
-    const childrenLen = children.length / slidesToShow;
+    const childrenLen = children.length / slidesToShow
 
     if (current + 1 < childrenLen) {
-      setCurrent(current + 1);
-      setCommand('next');
+      setCurrent(current + 1)
+      setCommand('next')
     } else {
-      setCurrent(0);
-      setCommand('next');
+      setCurrent(0)
+      setCommand('next')
     }
 
     if (clear) {
-      clearInterval(loop);
-      updateLoop(nextSlide);
+      clearInterval(loop)
+      updateLoop(nextSlide)
     }
   }
 
   useEffect(() => {
-    updateLoop(nextSlide);
+    updateLoop(nextSlide)
     return () => {
-      clearInterval(loop);
+      clearInterval(loop)
     }
-  }, []);
+  }, [])
 
   function prevSlide() {
-    const childrenLen = children.length / slidesToShow;
-    clearInterval(loop);
+    const childrenLen = children.length / slidesToShow
+    clearInterval(loop)
 
     if (current !== 0) {
-      setCurrent(current - 1);
-      setCommand('prev');
+      setCurrent(current - 1)
+      setCommand('prev')
     } else {
-      setCurrent(childrenLen - 1);
-      setCommand('prev');
+      setCurrent(childrenLen - 1)
+      setCommand('prev')
     }
 
-    updateLoop(nextSlide);
+    updateLoop(nextSlide)
   }
 
   function divideChildContent() {
     if (!Array.isArray(children)) {
-      return (
-        <div className={cx(styles.slide, slideClassName)}>
-          {children}
-        </div>
-      );
+      return <div className={cx(styles.slide, slideClassName)}>{children}</div>
     }
 
     return React.Children.map(children, (_, index) => {
-      const indexPlus = index + 1;
+      const indexPlus = index + 1
       if (indexPlus % slidesToShow === 0) {
         return (
           <div className={cx(styles.slide, slideClassName)}>
             {children.slice(indexPlus - slidesToShow, indexPlus)}
             {showExtra && children.slice(indexPlus, indexPlus + 1)}
           </div>
-        );
+        )
       }
 
-      return null;
-    });
+      return null
+    })
   }
 
   function renderChildren() {
-    const dividedChildren = divideChildContent();
+    const dividedChildren = divideChildContent()
 
     if (!Array.isArray(dividedChildren)) {
       return React.cloneElement(dividedChildren, {
-        className: cx(styles.currentSlide, styles[command], dividedChildren.props.className),
-      });
+        className: cx(
+          styles.currentSlide,
+          styles[command],
+          dividedChildren.props.className
+        ),
+      })
     }
 
     return React.Children.map(dividedChildren, (child, index) => {
-      const isCurrent = cx({ [styles.currentSlide]: current === index });
+      const isCurrent = cx({ [styles.currentSlide]: current === index })
       return React.cloneElement(child, {
         className: cx(isCurrent, styles[command], child.props.className),
-      });
-    });
+      })
+    })
   }
 
   function renderArrows() {
+    console.log('arrows')
     return (
       <div className={styles.arrow}>
-        <button type="button" className={styles.arrowLeft} onClick={() => prevSlide()}>
+        <button
+          type="button"
+          className={styles.arrowLeft}
+          onClick={() => prevSlide()}
+        >
           <Icon name="arrow_back_ios" />
         </button>
 
-        <button type="button" className={styles.arrowRight} onClick={() => nextSlide(true)}>
+        <button
+          type="button"
+          className={styles.arrowRight}
+          onClick={() => nextSlide(true)}
+        >
           <Icon name="arrow_forward_ios" />
         </button>
       </div>
-    );
+    )
   }
 
   return (
     <Hammer onSwipeRight={prevSlide} onSwipeLeft={nextSlide}>
-      <div className={cx(styles.content, className, { [styles.withArrow]: arrows })}>
+      <div
+        className={cx(styles.content, className, {
+          [styles.withArrow]: arrows,
+        })}
+      >
         <div className={cx(styles.wrapper, wrapperClassName)}>
           {renderChildren()}
         </div>
@@ -132,7 +157,7 @@ const Slider = ({ autoplay, delay, children, showExtra, slideClassName, slidesTo
         {arrows && children.length > 1 && renderArrows()}
       </div>
     </Hammer>
-  );
+  )
 }
 
 Slider.propTypes = {

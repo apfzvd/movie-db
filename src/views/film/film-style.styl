@@ -16,8 +16,13 @@
   width: 100%;
 }
 
+.ico {
+  cursor: pointer;
+}
+
 .heroImage {
-  display: relative;
+  max-height: 60vh;
+  overflow: hidden;
 }
 
 .play {
@@ -29,6 +34,11 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
+
+  +forLarge() {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 .infoHead {
@@ -93,5 +103,5 @@ $icon {
 }
 
 .navContent {
-  margin-top: 2.5rem;
+  padding-top: 1rem;
 }

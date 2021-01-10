@@ -26,7 +26,7 @@ const filmSlice = createSlice({
   name: 'film',
   initialState: {
     details: {
-      loading: false,
+      loading: true,
       data: {
         genres: [],
       },

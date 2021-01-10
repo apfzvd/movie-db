@@ -70,11 +70,11 @@ const Film = ({ match: { params } }) => {
     <div>
       <section className={styles.hero}>
         <div className={styles.header}>
-          <Icon onClick={goBack} name="arrow_back" />
+          <Icon className={styles.ico} onClick={goBack} name="arrow_back" />
 
           <div className={cx('flow-col')}>
-            <Icon name="favorite_border" />
-            <Icon name="open_in_new" />
+            <Icon className={styles.ico} name="favorite_border" />
+            <Icon className={styles.ico} name="open_in_new" />
           </div>
         </div>
 
@@ -84,7 +84,11 @@ const Film = ({ match: { params } }) => {
           </span>
           <img
             onError={addDefaultSrc}
-            src={imageUrl(details.data.backdrop_path)}
+            src={
+              !details.loading
+                ? imageUrl(details.data.backdrop_path)
+                : 'http://placehold.it/500x280?text=Loading...'
+            }
             alt=""
           />
         </div>
