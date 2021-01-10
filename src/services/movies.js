@@ -27,4 +27,7 @@ export const movies = {
   getVideos(filmId) {
     return http.get(`/movie/${filmId}/videos`)
   },
+  getSearchMovie(query) {
+    return http.get(`/search/movie`, { params: { query } })
+  },
 }

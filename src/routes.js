@@ -5,6 +5,7 @@ import AppRoute from './helpers/app-route'
 
 import Home from './views/home'
 import Film from './views/film'
+import Search from './views/search'
 
 import history from './history'
 
@@ -21,7 +22,8 @@ export default function Routes() {
           component={Film}
           withHeader={false}
         />
-        <AppRoute exact path="/busca/:query" component={Teste} />
+        <AppRoute exact path="/busca" component={Search} />
+        <AppRoute exact path="/busca/:query" component={Search} />
         <AppRoute exact path="/descubra" component={Teste} />
         <AppRoute exact path="/favoritos" component={Teste} />
       </Switch>

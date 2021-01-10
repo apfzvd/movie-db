@@ -38,10 +38,14 @@ const Shelf = ({
 
   async function getList() {
     setLoading(true)
-    const data = await movies[request](searchId)
-    setLoading(false)
-    if (data.data.results) {
-      setMovieList(data.data.results)
+    try {
+      const data = await movies[request](searchId)
+      setLoading(false)
+      if (data.data.results) {
+        setMovieList(data.data.results)
+      }
+    } catch (err) {
+      setLoading(false)
     }
   }
 

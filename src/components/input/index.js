@@ -7,7 +7,15 @@ import Icon from '../icon'
 
 import styles from './input.styl'
 
-const Input = ({ type, className, iconLeft, onChange, ...props }) => {
+const Input = ({
+  type,
+  className,
+  iconLeft,
+  iconRight,
+  onChange,
+  onCancel,
+  ...props
+}) => {
   const handleChange = (evt) => {
     if (onChange) {
       onChange(evt.target.value, evt)
@@ -27,6 +35,13 @@ const Input = ({ type, className, iconLeft, onChange, ...props }) => {
         {...props}
       />
       {iconLeft && <Icon className={styles.iconLeft} name={iconLeft} />}
+      {iconRight && (
+        <Icon
+          className={styles.iconRight}
+          name={iconRight}
+          onClick={onCancel}
+        />
+      )}
     </div>
   )
 }
@@ -35,7 +50,9 @@ Input.propTypes = {
   type: PropTypes.string,
   className: PropTypes.string,
   iconLeft: PropTypes.string,
+  iconRight: PropTypes.string,
   onChange: PropTypes.func,
+  onCancel: PropTypes.func,
 }
 
 Input.defaultProps = {}

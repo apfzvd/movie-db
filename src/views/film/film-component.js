@@ -101,6 +101,8 @@ const Film = ({ match: { params } }) => {
   )
 }
 
-Film.propTypes = {}
+Film.propTypes = {
+  match: PropTypes.object,
+}
 
 export default Film

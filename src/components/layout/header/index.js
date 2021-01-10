@@ -79,7 +79,14 @@ const Header = ({ screenSize }) => {
 
         <div className={styles.headerLargeSide}>
           <form onSubmit={submitSearch}>
-            <Input onChange={setSearch} iconLeft="search" type="text" />
+            <Input
+              onChange={setSearch}
+              iconLeft="search"
+              type="text"
+              onCancel={() => setSearch('')}
+              iconRight={search && 'close'}
+              value={search}
+            />
           </form>
           <div className={styles.headerItemPerf}>
             <img src="https://picsum.photos/60" alt="Perfil" />

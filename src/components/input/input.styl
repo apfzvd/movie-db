@@ -3,12 +3,17 @@
 $icon {
   position: absolute;
   z-index: 1;
-  top: 5px;
+  top: 4px;
   color: $c-text;
 }
 
 .inputWrap {
   position: relative;
+  box-sizing: border-box;
+}
+
+.input {
+  box-sizing: border-box;
 }
 
 .input.text {
@@ -39,4 +44,9 @@ $icon {
 .iconLeft {
   @extend $icon;
   left: 0.5rem;
+}
+
+.iconRight {
+  @extend $icon;
+  right: 0.5rem;
 }
