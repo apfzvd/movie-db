@@ -15,28 +15,42 @@
 }
 
 .films {
-  display: grid;
-  grid-auto-flow: column dense;
-  column-gap: 1.5rem;
+  display: flex;
+  align-items: flex-start;
 }
 
 .filmLeft {}
 
 .filmImg {
   width: auto;
-  height: 350px;
+  height: 200px;
   overflow: hidden;
   border-bottom-left-radius: 15px;
   border-top-left-radius: 15px;
+  margin-right: 1.5rem;
+
+  +forLarge() {
+    height: 300px;
+  }
 }
 
 .filmRight {
   box-sizing: border-box;
-  padding: 1rem 0;
+  padding: .5rem 0;
+
+  +forLarge() {
+    padding: 1.5rem 0;
+  }
 }
 
 .filmTitle {
-  @extend $title;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: $c-title;
+
+  +forLarge() {
+    font-size: 2rem;
+  }
 }
 
 .countItem {

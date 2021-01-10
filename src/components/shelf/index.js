@@ -24,7 +24,7 @@ const Shelf = ({
   arrows,
   searchId,
 }) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [movieList, setMovieList] = useState([])
   const [currentSlide, setCurrentSlide] = useState(1)
 
@@ -160,6 +160,9 @@ const Shelf = ({
         >
           {movieList.map((movie) => renderSlide(movie))}
         </Slider>
+      )}
+      {!movieList.length && !loading && (
+        <p>Ops, parece que não encontramos nenhum filme :(</p>
       )}
     </div>
   )

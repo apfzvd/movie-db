@@ -5,6 +5,7 @@ import cx from 'classnames'
 
 import imageUrl from '../../helpers/image-url'
 import navigateTo from '../../helpers/navigate-to'
+import truncate from '../../helpers/truncate'
 
 import Input from '../../components/input'
 import Icon from '../../components/icon'
@@ -69,6 +70,9 @@ const Search = ({ match: { params } }) => {
 
   const goToMovie = (id) => () => navigateTo(`/filme/${id}`)
 
+  const getOverview = (overview) =>
+    overview || 'Ops, parece que esse filme não tem resumo!'
+
   const renderFilms = ({ id, title, poster_path, popularity, overview }) => (
     <div onClick={goToMovie(id)} className={styles.films}>
       <div className={styles.filmLeft}>
@@ -86,7 +90,11 @@ const Search = ({ match: { params } }) => {
           <Icon className={styles.popular} name="favorite" />
           {Math.ceil(popularity)}
         </div>
-        <div>{overview || 'Ops, parece que esse filme não tem resumo!'}</div>
+        <div>
+          {['small', 'medium'].includes(screenSize)
+            ? truncate(getOverview(overview), 100)
+            : getOverview(overview)}
+        </div>
       </div>
     </div>
   )
@@ -99,7 +107,7 @@ const Search = ({ match: { params } }) => {
       {renderSearchInput()}
       <section className={cx(styles.results, 'flow-lg')}>
         {renderResults()}
-        {!result.length && (
+        {!result.length && !loading && (
           <div className={cx(styles.noResults, 'flow')}>
             <p>Em que filme você está pensando? 🤔</p>
             <p>🕵️‍♀️ Tente usar a barra de busca!</p>
