@@ -15,7 +15,7 @@ import { goBack } from '../../helpers/navigate-to'
 
 const Film = ({ match: { params } }) => {
   const dispatch = useDispatch()
-  const { details, videos } = useSelector(({ film }) => film)
+  const { details } = useSelector(({ film }) => film)
   const { movieId } = params
 
   useEffect(() => {
@@ -62,6 +62,10 @@ const Film = ({ match: { params } }) => {
       </section>
     )
 
+  const addDefaultSrc = (evt) => {
+    evt.target.src = 'http://placehold.it/500x280?text=sem%20imagem%20:('
+  }
+
   return (
     <div>
       <section className={styles.hero}>
@@ -78,7 +82,11 @@ const Film = ({ match: { params } }) => {
           <span className={styles.play}>
             <Icon name="play_arrow" />
           </span>
-          <img src={imageUrl(details.data.backdrop_path)} alt="" />
+          <img
+            onError={addDefaultSrc}
+            src={imageUrl(details.data.backdrop_path)}
+            alt=""
+          />
         </div>
       </section>
 

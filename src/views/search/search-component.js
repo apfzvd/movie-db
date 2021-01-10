@@ -7,6 +7,7 @@ import imageUrl from '../../helpers/image-url'
 import navigateTo from '../../helpers/navigate-to'
 
 import Input from '../../components/input'
+import Icon from '../../components/icon'
 
 import { movies } from '../../services/movies'
 
@@ -34,7 +35,10 @@ const Search = ({ match: { params } }) => {
   }
 
   useEffect(() => {
-    getResults()
+    if (query) {
+      getResults()
+      setSearch(query)
+    }
   }, [query])
 
   const submitSearch = (evt) => {
@@ -59,9 +63,49 @@ const Search = ({ match: { params } }) => {
       </section>
     )
 
+  const addDefaultSrc = (evt) => {
+    evt.target.src = 'http://placehold.it/500x740?text=sem%20imagem%20:('
+  }
+
+  const goToMovie = (id) => () => navigateTo(`/filme/${id}`)
+
+  const renderFilms = ({ id, title, poster_path, popularity, overview }) => (
+    <div onClick={goToMovie(id)} className={styles.films}>
+      <div className={styles.filmLeft}>
+        <img
+          className={styles.filmImg}
+          onError={addDefaultSrc}
+          src={imageUrl(poster_path)}
+          alt={title}
+        />
+      </div>
+
+      <div className={cx(styles.filmRight, 'flow')}>
+        <h4 className={styles.filmTitle}>{title}</h4>
+        <div className={cx(styles.countItem, 'flow-col')}>
+          <Icon className={styles.popular} name="favorite" />
+          {Math.ceil(popularity)}
+        </div>
+        <div>{overview || 'Ops, parece que esse filme não tem resumo!'}</div>
+      </div>
+    </div>
+  )
+
+  const renderResults = () =>
+    loading ? 'loading...' : result.map((res) => renderFilms(res))
+
   return (
-    <div>
+    <div className={styles.search}>
       {renderSearchInput()}
+      <section className={cx(styles.results, 'flow-lg')}>
+        {renderResults()}
+        {!result.length && (
+          <div className={cx(styles.noResults, 'flow')}>
+            <p>Em que filme você está pensando? 🤔</p>
+            <p>🕵️‍♀️ Tente usar a barra de busca!</p>
+          </div>
+        )}
+      </section>
     </div>
   )
 }
