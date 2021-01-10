@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component #render render correctly 1`] = `
+"<div className={[undefined]}>
+  <section className={[undefined]}>
+    <div className={[undefined]}>
+      <div className=\\"flow\\">
+        <h1 className={[undefined]}>
+          O cinema nas suas mãos
+        </h1>
+        <h3 className={[undefined]}>
+          Filmes adicionados e selecionados exclusivamente para você
+        </h3>
+      </div>
+      <Shelf className={[undefined]} displayInfo=\\"details\\" request=\\"getUpcoming\\" slidesToShow={1} onChange={[Function: bound _dispatchAction]} showExtra={true} tileOrientation=\\"portrait\\" />
+    </div>
+  </section>
+  <section className={[undefined]}>
+    <Shelf displayInfo=\\"popularity\\" title=\\"Os mais amados\\" request=\\"getDiscover\\" slidesToShow={2} showExtra={true} tileOrientation=\\"portrait\\" />
+  </section>
+  <section className={[undefined]}>
+    <Shelf displayInfo=\\"rating\\" title=\\"Os melhores avaliados\\" request=\\"getTopRated\\" slidesToShow={2} showExtra={true} tileOrientation=\\"portrait\\" />
+  </section>
+</div>"
+`;

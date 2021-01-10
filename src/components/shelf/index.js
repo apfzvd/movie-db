@@ -178,6 +178,7 @@ Shelf.propTypes = {
     'getUpcoming',
     'getSimilar',
     'getLatest',
+    'getNowPlaying',
   ]).isRequired,
   displayInfo: PropTypes.oneOf(['popularity', 'rating', 'details', 'clean']),
   slidesToShow: PropTypes.number,

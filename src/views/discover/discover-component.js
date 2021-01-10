@@ -1,16 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
-import cx from 'classnames'
-
-import imageUrl from '../../helpers/image-url'
-import navigateTo from '../../helpers/navigate-to'
-import truncate from '../../helpers/truncate'
-
-import Input from '../../components/input'
+import React from 'react'
 import Shelf from '../../components/shelf'
-
-import { movies } from '../../services/movies'
 
 import styles from './discover-style.styl'
 

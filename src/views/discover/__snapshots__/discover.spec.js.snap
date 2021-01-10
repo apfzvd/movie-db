@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Discover component #render render correctly 1`] = `
+"<div className={[undefined]}>
+  <h1 className={[undefined]}>
+    Descobrir
+  </h1>
+  <section className={[undefined]}>
+    <Shelf displayInfo=\\"clean\\" title=\\"Nos cinemas agora\\" request=\\"getNowPlaying\\" slidesToShow={2} showExtra={true} tileOrientation=\\"portrait\\" />
+  </section>
+  <section className={[undefined]}>
+    <Shelf displayInfo=\\"clean\\" title=\\"Em breve nos cinemas\\" request=\\"getUpcoming\\" slidesToShow={2} showExtra={true} tileOrientation=\\"portrait\\" />
+  </section>
+</div>"
+`;
