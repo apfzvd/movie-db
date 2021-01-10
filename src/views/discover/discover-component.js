@@ -8,14 +8,32 @@ import navigateTo from '../../helpers/navigate-to'
 import truncate from '../../helpers/truncate'
 
 import Input from '../../components/input'
-import Icon from '../../components/icon'
+import Shelf from '../../components/shelf'
 
 import { movies } from '../../services/movies'
 
 import styles from './discover-style.styl'
 
 const Discover = () => {
-  return <div>Discover</div>
+  return (
+    <div className={styles.discover}>
+      <h1 className={styles.title}>Descobrir</h1>
+      <section className={styles.shelfRow}>
+        <Shelf
+          displayInfo="clean"
+          title="Nos cinemas agora"
+          request="getNowPlaying"
+        />
+      </section>
+      <section className={styles.shelfRow}>
+        <Shelf
+          displayInfo="clean"
+          title="Em breve nos cinemas"
+          request="getUpcoming"
+        />
+      </section>
+    </div>
+  )
 }
 
 Discover.propTypes = {}

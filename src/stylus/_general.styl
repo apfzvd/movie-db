@@ -13,12 +13,22 @@ img {
 }
 
 $sectionPadding {
-  padding: 2.2rem;
+  padding: 1.8rem 2.4rem;
   overflow: hidden;
   box-sizing: border-box;
 
   +forLarge() {
     padding: 4rem;
+  }
+}
+
+$sectionPaddingNoflow {
+  padding: 0 2.2rem;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  +forLarge() {
+    padding: 0 4rem;
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
+import { format } from 'date-fns'
 
 import cx from 'classnames'
 import { fetchFilmDetails, fetchVideos } from './film-store'
@@ -31,7 +32,10 @@ const Film = ({ match: { params } }) => {
     ) : (
       <section className={cx(styles.infoHead, 'flow')}>
         <div className={cx(styles.infoBase, 'flow')}>
-          <h1 className={styles.title}>{details.data.title}</h1>
+          <h1 className={styles.title}>
+            {details.data.title} (
+            {format(new Date(details.data.release_date), 'yyyy')})
+          </h1>
           <h4>{details.data.genres.join(', ')}</h4>
         </div>
 

@@ -23,8 +23,8 @@ const Header = ({ screenSize }) => {
         icon: 'home',
       },
       {
-        name: 'Descubir',
-        path: '/descubra',
+        name: 'Descobir',
+        path: '/descobrir',
         icon: 'movie',
       },
       {

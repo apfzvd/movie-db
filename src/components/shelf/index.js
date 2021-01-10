@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
+import { format } from 'date-fns'
 
 import { movies } from '../../services/movies'
 
@@ -100,7 +101,9 @@ const Shelf = ({
   const renderMovieDetails = ({ title, release_date }) => (
     <div className={cx(styles.details, 'flow')}>
       <h4 className={styles.detailsTitle}>{title}</h4>
-      <p className={styles.detailsSubtitle}>{release_date}</p>
+      <p className={styles.detailsSubtitle}>
+        {format(new Date(release_date), 'dd/MM/yyyy')}
+      </p>
     </div>
   )
 
@@ -174,6 +177,7 @@ Shelf.propTypes = {
     'getDiscover',
     'getUpcoming',
     'getSimilar',
+    'getLatest',
   ]).isRequired,
   displayInfo: PropTypes.oneOf(['popularity', 'rating', 'details', 'clean']),
   slidesToShow: PropTypes.number,

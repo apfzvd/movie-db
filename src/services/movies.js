@@ -8,10 +8,14 @@ export const movies = {
     return http.get('/movie/upcoming')
   },
   getTopRated() {
-    // vote_average
     return http.get('movie/top_rated')
   },
-  // details
+  getNowPlaying() {
+    return http.get('/movie/now_playing')
+  },
+  getLatest() {
+    return http.get('/movie/latest')
+  },
   getDetails(filmId) {
     return http.get(`/movie/${filmId}`)
   },
@@ -20,9 +24,6 @@ export const movies = {
   },
   getCrew(filmId) {
     return http.get(`/movie/${filmId}/credits`)
-  },
-  getReleaseDates(filmId) {
-    return http.get(`/movie/${filmId}/release_dates`)
   },
   getVideos(filmId) {
     return http.get(`/movie/${filmId}/videos`)
