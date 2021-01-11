@@ -38,7 +38,7 @@ const filmSlice = createSlice({
   },
   reducers: {},
   extraReducers: {
-    [fetchFilmDetails.loading]: (state) => {
+    [fetchFilmDetails.pending]: (state) => {
       state.details.loading = true
     },
     [fetchFilmDetails.fulfilled]: (state, action) => {
@@ -52,7 +52,7 @@ const filmSlice = createSlice({
       state.details.loading = false
     },
 
-    [fetchVideos.loading]: (state) => {
+    [fetchVideos.pending]: (state) => {
       state.videos.loading = true
     },
     [fetchVideos.fulfilled]: (state, action) => {
