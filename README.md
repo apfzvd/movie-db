@@ -2,6 +2,8 @@
 
 Aplicação feita usando a api [themoviedb](https://developers.themoviedb.org/3/getting-started/introduction). É possível buscar por filmes e ver seus detalhes, além de visualizar diversas coleções de filme em diferentes páginas.
 
+Pode ser acessado em: [https://apfzvd-movie-db.netlify.app/](https://apfzvd-movie-db.netlify.app/)
+
 ## 💾 Tecnologias
 
 - React;
